@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PM3E44.Views.AgregarEmpleadoPage"
+              xmlns:local="clr-namespace:PM3E44.ViewModels">
+    <ContentPage.BindingContext>
+        <local:AgregarEmplandoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Spacing="5" Padding="15">
+                <Label Text="ID" FontSize="Medium" IsEnabled="false" />
+                <Entry Text="{Binding Empleados.Id, Mode=TwoWay}"  FontSize="Medium" IsEnabled="false"  />
+
+                <Label Text="Nombre" FontSize="Medium" />
+                <Entry Text="{Binding Empleados.Nombre, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Apellidos" FontSize="Medium" />
+                <Entry Text="{Binding Empleados.Apellidos, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Edad" FontSize="Medium" />
+                <Entry Text="{Binding Empleados.edad, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Direccion" FontSize="Medium" />
+                <Entry Text="{Binding Empleados.Dir, Mode=TwoWay}" FontSize="Medium" />
+
+                <Label Text="Puesto" FontSize="Medium" />
+                <Entry Text="{Binding Empleados.Puesto, Mode=TwoWay}" FontSize="Medium" />
+
+               
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancelar" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Guardar" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

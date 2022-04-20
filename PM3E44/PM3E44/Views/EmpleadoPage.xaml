@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:Models="clr-namespace:PM3E44.Models" 
+             xmlns:local="clr-namespace:PM3E44.ViewModels"
+             x:Class="PM3E44.Views.EmpleadoPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar" Command="{Binding AgregarEmpleadoCommand}">
+
+
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView x:DataType="local:EmpleadoViewModel"
+                         Command="{Binding LoadEmpleadoCommand}"
+                         IsRefreshing="{Binding IsBusy,Mode=OneWay}">
+
+                <CollectionView ItemsSource="{Binding Empleados}"
+                                SelectionMode="None">
+                    <CollectionView.EmptyView>
+                        <StackLayout>
+                            <Label Text="No Hay Mas Datos" HorizontalOptions="Center" FontAttributes="Italic" FontSize="Medium"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="Models:Empleados">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Eliminar" BackgroundColor="Red" Command="{Binding Source=
+                                                {RelativeSource AncestorType={x:Type local:EmpleadoViewModel}},
+                                                Path=EmpleadoDelete}" CommandParameter="{Binding .}"/>
+                                            <SwipeItem IsDestructive="True" Text="Cerrar" BackgroundColor="Green"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                              
+                                <Grid Padding="5">
+                                    <Frame CornerRadius="10" HasShadow="True">
+                                        <StackLayout Orientation="Horizontal">
+
+                                                <Image Grid.RowSpan="2" Source="Empleado.png" Aspect="AspectFill" HeightRequest="60"
+                                                   WidthRequest="60"></Image>
+                                                <StackLayout>
+                                                <Label Grid.Column="1" Text="{Binding Nombre}" FontAttributes="Bold"></Label>
+                                                <Label Grid.Row="1"  Grid.Column="1" Text="{Binding Puesto}" VerticalOptions="End"></Label>
+
+                                            </StackLayout>
+                                            <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                                                <Image Source="edit.png" Grid.Column="4" WidthRequest="30" HeightRequest="30" VerticalOptions="EndAndExpand">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                           Command="{Binding Source={RelativeSource AncestorType={x:Type local:EmpleadoViewModel}},
+                                                           Path=EmpleadoEdit}" CommandParameter="{Binding .}">
+
+                                                        </TapGestureRecognizer>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </StackLayout>
+
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                                </SwipeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Label Text="Lista Empleados " FontSize="Large" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+                            <Label Text="Deslice a la Izquierda para eliminar" FontSize="Medium" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.Footer>
+                        <StackLayout>
+                            <Label Text="Bajar para cargar" FontSize="Medium" TextColor="Gray" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </RefreshView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
